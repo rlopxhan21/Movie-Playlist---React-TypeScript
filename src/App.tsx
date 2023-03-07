@@ -17,6 +17,7 @@ const App: React.FC = () => {
 
   const [displayData, setDisplayData] = React.useState<DisplayDataType[]>([])
 
+
 // Reciving data & error after submission
   const onMovieDataHandler = useCallback((data: DisplayDataType) => {
     setMovieData(data)
@@ -36,6 +37,11 @@ const App: React.FC = () => {
 
   const onAddMovieHandler = (data: DisplayDataType[]) => {
     setDisplayData(data)
+  }
+
+  const onDeleteDisplayData = (imdbID: string) => {
+    const tempArray = displayData.filter(item => item.imdbID !== imdbID)
+    setDisplayData(tempArray)
   }
 
   return (
@@ -59,7 +65,7 @@ const App: React.FC = () => {
             onMovieClearHandler={onMovieClearHandler}
           />
 
-          <TabDisplay displayData={displayData} />
+          <TabDisplay displayData={displayData} onDeleteDisplayData={onDeleteDisplayData} />
           
         </Stack>
       </Container>

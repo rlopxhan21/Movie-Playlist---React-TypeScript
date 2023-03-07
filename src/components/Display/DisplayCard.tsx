@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -11,11 +12,12 @@ import {
 import { DisplayDataType } from "../../Interfaces/Interface";
 
 interface Props {
-    item: DisplayDataType
+  item: DisplayDataType,
+  onDeleteDisplayData: (imdbID: string) => void
 
 }
 
-export const DisplayCard: React.FC<Props> = ({ item }) => {
+export const DisplayCard: React.FC<Props> = ({ item, onDeleteDisplayData }) => {
   return (
     <Card sx={{ width: 350, pb: 2 }}>
       <CardMedia
@@ -42,6 +44,9 @@ export const DisplayCard: React.FC<Props> = ({ item }) => {
           />
         </Stack>
       </CardContent>
+      <Stack px={2}>
+        <Button variant="contained" color="error" onClick={() => onDeleteDisplayData(item.imdbID)}>Delete</Button>
+      </Stack>
     </Card>
   );
 };

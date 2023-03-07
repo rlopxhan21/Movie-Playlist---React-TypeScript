@@ -8,6 +8,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 
 interface Props {
     displayData: DisplayDataType[],
+    onDeleteDisplayData: (imdbID:string) => void
 }
 
 const tabHeader: {
@@ -36,7 +37,7 @@ const tabHeader: {
             },
     ]
         
-export const TabDisplay: React.FC<Props> = ({displayData}) => {
+export const TabDisplay: React.FC<Props> = ({displayData, onDeleteDisplayData}) => {
     const [value, setValue] = React.useState('1')
 
     const onTabChangeHandler = (event: React.SyntheticEvent, newValue: string ) => {
@@ -58,7 +59,7 @@ export const TabDisplay: React.FC<Props> = ({displayData}) => {
              
               {tabHeader.map(item => <TabPanel key={item.value} value={item.value} sx={{ minHeight: '100vh' }}>
                     <Stack direction={"row"} gap={2}>
-                      {filteredData(item.label.toLowerCase()).map((filItem, i) => <DisplayCard key={i} item={filItem} />)}
+                      {filteredData(item.label.toLowerCase()).map((filItem, i) => <DisplayCard key={i} item={filItem} onDeleteDisplayData={onDeleteDisplayData} />)}
                     </Stack>
               </TabPanel>)}
           </TabContext>
